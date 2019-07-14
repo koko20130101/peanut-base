@@ -1,13 +1,17 @@
 <template>
   <div class="aside">
-    <div class="logo">
+    <div class="logo" v-if="!collapse">
       <img src="../assets/img/logo.png" alt="">
+      <h3 class="title">花生小店运营系统</h3>
+    </div>
+    <div class="logo logo-small" v-if="collapse">
+      <img src="../assets/img/logo-small.png" alt="">
     </div>
     <el-menu :default-active="onRoute" @select="selectMenu" :collapse="collapse">
       <template v-for="item in menuList">
         <el-submenu v-if="item.children && item.children.length  > 0" :key="item.routerName" :index="item.routerName">
           <template slot="title">
-            <i class="item.icon"></i>
+            <i class="el-icon-document-copy"></i>
             <span slot="title">{{item.title}}</span>
           </template>
           <template v-for="sub in item.children">
@@ -48,7 +52,7 @@ export default {
         {
           'id': 53,
           'title': '系统管理',
-          'icon': 'ios-settings',
+          'icon': 'el-icon-document-copy',
           'routerName': '7',
           'children': [
             {
@@ -87,16 +91,15 @@ export default {
   },*/
   methods: {
     selectMenu (routerName, indexPath) {
-        console.log(this.$router)
       // this.$emit('change-router')
-      /*this.$router.push({
+      this.$router.push({
         name: routerName
-      })*/
-        console.log(this.$router)
+      })
     }
   }
 }
 </script>
 
 <style scoped>
+
 </style>

@@ -75,12 +75,18 @@ a {
   }
 }
 
+.container{
+  height:100%;
+}
+//头部
 .main-nav-top {
   height: 40px;
   line-height: 40px;
   overflow: visible;
-  background: #dadadb;
+  background: #fff;
+  border-bottom:1px solid #e6e6e6;
   position: relative;
+  z-index: 1;
   .right-btn {
     position: absolute;
     right: 10px;
@@ -94,6 +100,16 @@ a {
       }
     }
   }
+  .welcome {
+    float: left
+  }
+  .top-dropdown {
+    float: right
+  }
+  .el-dropdown-link {
+    cursor: pointer;
+    color: #409EFF;
+  }
 }
 
 .content {
@@ -105,24 +121,52 @@ a {
   margin-bottom:10px;
   text-align: right;
 }
-.el-form--inline .el-input{
-  width:150px;
-}
-.el-form-item{
-  margin-bottom:10px;
-}
+
 .pages{
   padding: 20px 0 0 0 ;
   text-align:right;
 }
-.el-table thead{
-  background:#ccc;
+
+.el-form--inline{
+  .el-input,.el-date-editor.el-input{
+    width:150px;
+  }
 }
-.el-table th.t-head{
-  background:#e9f0f8;
-  border-right:1px solid #fff;
-  padding:8px 0;
+
+.ui-table{
+  .el-table__header th{
+    background-color: #ecf5ff;
+    border-right:1px solid #FFF;
+    padding:8px 0;
+  }
+  .el-table__body td{
+    padding:8px 0;
+  }
 }
-.el-table td{
-  padding:8px 0;
+
+.side-bar{
+  height:100%;
+  background: #fff;
+  border-right:1px solid #e6e6e6;
+  box-shadow: 2px 0 4px #eee;
+  overflow: hidden;
+  transition: width .6s ease;
+  position: relative;
+  z-index:2;
+  .logo{
+    padding:10px 0 0;
+    text-align: center;
+    .title{
+      margin:6px;
+      padding-top:10px;
+      border-top:1px solid #eee;
+      font-weight:600;
+    }
+  }
+  .aside{
+    overflow: hidden;
+  }
+  .el-menu{
+    border:0;
+  }
 }

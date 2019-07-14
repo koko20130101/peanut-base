@@ -38,15 +38,5 @@ export default {
 </script>
 
 <style lang="scss">
-  .welcome {
-    float: left
-  }
 
-  .top-dropdown {
-    float: right
-  }
-  .el-dropdown-link {
-    cursor: pointer;
-    color: #409EFF;
-  }
 </style>

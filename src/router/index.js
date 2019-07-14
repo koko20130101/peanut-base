@@ -19,6 +19,7 @@ router.beforeEach((to, from, next) => {
      */
     // 根据路由设置的requireAuth决定该路由是否要检查登录
     if (to.meta.isAuth) {
+        next()
         // 检查是否登录
         /*if (store.getters['app/isLogin']) {
             next()
