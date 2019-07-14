@@ -1,6 +1,9 @@
 <template>
     <div class="login-container">
         <div class="login-main">
+            <div class="theme">
+                <img src="../assets/img/login_bg_2.png" alt="">
+            </div>
             <div class="box">
                 <el-form ref="form" label-position="left" :rules="rules" :model="loginInfo" label-width="80px">
                     <el-form-item label="用户名：" prop="username">
