@@ -118,7 +118,7 @@ a {
   border:1px solid #e9e8e8;
 }
 .tool-buttons{
-  margin-bottom:10px;
+  margin-bottom:18px;
   text-align: right;
 }
 
@@ -150,14 +150,14 @@ a {
   border-right:1px solid #e6e6e6;
   box-shadow: 2px 0 4px #eee;
   overflow: hidden;
-  transition: width .6s ease;
+  transition: width .4s ease;
   position: relative;
   z-index:2;
   .logo{
     padding:10px 0 0;
     text-align: center;
     .title{
-      margin:6px;
+      margin:10px;
       padding-top:10px;
       border-top:1px solid #eee;
       font-weight:600;

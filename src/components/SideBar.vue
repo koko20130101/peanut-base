@@ -51,7 +51,7 @@ export default {
       menuList: [
         {
           'id': 53,
-          'title': '系统管理',
+          'title': '账户管理',
           'icon': 'el-icon-document-copy',
           'routerName': '7',
           'children': [
@@ -71,7 +71,7 @@ export default {
             },
             {
               'id': 98,
-              'title': '权限管理',
+              'title': '资源管理',
               'icon': '',
               'routerName': 'ResourceList',
               'children': []
