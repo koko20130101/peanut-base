@@ -1,12 +1,14 @@
 //主视图
 const main = () => import(/* webpackChunkName: "home" */ '@/views/Home');
-
-
 export default [
     {
         path: '/',
         name: 'Home',
         component: main,
+        meta:{
+            title:'首页',
+            isAuth:true
+        }
     },
     {
         path: '',

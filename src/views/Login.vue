@@ -48,19 +48,34 @@
                 }
             }
         },
-        methods:{
-            submitForm (formName) {
+        methods: {
+            ...mapActions({
+                doLogin: 'app/login',
+                getMenu: 'permission/getMenu',
+            }),
+            submitForm(formName) {
                 // 表单验证
                 this.$refs[formName].validate(/* 异步 */ async valid => {
                     if (valid) {
+                        try {
+                            await this.doLogin({
+                                username: this.loginInfo.username,
+                                password: MD5(this.loginInfo.pwd).toString()
+                            }).then(res =>{
+                                alert(9)
+                                console.log(res)
+                            })
+                        } catch (e){
+                            //
+                        }
                         // 等待登录成功
                         /*await this.login({
                             username: this.loginInfo.username,
-                            pwd: MD5(this.loginInfo.pwd).toString()
-                        })*/
+                            password: MD5(this.loginInfo.pwd).toString()
+                        })
                         this.$router.push({
                             name: 'userList'
-                        })
+                        })*/
                     }
                 })
             },

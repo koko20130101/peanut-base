@@ -49,7 +49,7 @@
                 }
             }
         },
-        beforeCreate(){
+        /*beforeCreate(){
             console.log(1)
         },
         created(){
@@ -69,7 +69,7 @@
         },
         destroyed(){
             console.log(7)
-        }
+        }*/
 
     }
 </script>

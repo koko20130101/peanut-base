@@ -1,4 +1,5 @@
 import Vue from 'vue' // 引入Vue
+import store from '@/store'
 import Router from 'vue-router' // 引入 vue-router
 import routes from './routers' // 引入路由配置
 
@@ -19,15 +20,14 @@ router.beforeEach((to, from, next) => {
      */
     // 根据路由设置的requireAuth决定该路由是否要检查登录
     if (to.meta.isAuth) {
-        next()
         // 检查是否登录
-        /*if (store.getters['app/isLogin']) {
+        if (store.getters['app/isLogin']) {
             next()
         } else {
             next({
                 name: 'Login'
             })
-        }*/
+        }
     } else {
         next()
     }
