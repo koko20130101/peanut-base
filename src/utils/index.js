@@ -28,7 +28,8 @@ export default {
         default:
           break
       }
-      secure && (value = AES.encrypt(value, AES_SECRET_KEY).toString())
+      //加密
+      //secure && (value = AES.encrypt(value, AES_SECRET_KEY).toString())
       if (cookie) {
         // nothing
       } else {
@@ -57,7 +58,8 @@ export default {
         if (value === null && fallback) value = window.sessionStorage.getItem(key)
       }
       if (value !== null) {
-        secure && (value = AES.decrypt(value, AES_SECRET_KEY).toString(ENC_UTF8))
+        //解密
+        //secure && (value = AES.decrypt(value, AES_SECRET_KEY).toString(ENC_UTF8))
         try {
           const _value = JSON.parse(value)
           const type = Object.prototype.toString.call(_value)

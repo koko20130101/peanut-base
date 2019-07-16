@@ -1,12 +1,10 @@
 <template>
     <div>
-        <el-row>
-            <el-col :span="24" align="right">
-                <div class="tool-buttons">
-                    <el-button plain type="primary" icon="el-icon-plus" @click="$refs['add-role'].open(row)">添加角色</el-button>
-                </div>
-            </el-col>
-        </el-row>
+        <el-form :inline="true" :label-position="'right'" size="small" class="demo-form-inline">
+            <el-form-item>
+                <el-button plain type="primary" icon="el-icon-plus" @click="$refs['add-role'].open()">添加角色</el-button>
+            </el-form-item>
+        </el-form>
         <el-table :inline="true" :data="tableData" class="ui-table">
             <el-table-column prop="id" label="id"></el-table-column>
             <el-table-column prop="name" label="角色名"></el-table-column>
@@ -27,6 +25,14 @@
                 </template>
             </el-table-column>
         </el-table>
+        <el-pagination
+                @size-change="handleSizeChange"
+                @current-change="handleCurrentChange"
+                :current-page.sync="currentPage"
+                :page-size="1"
+                layout="total, prev, pager, next"
+                :total="1">
+        </el-pagination>
         <add-role ref="add-role"></add-role>
         <distribute-resource ref="resource"></distribute-resource>
     </div>
@@ -43,30 +49,18 @@
         },
         data () {
             return {
-                tableData: [{
-                    id:'1',
-                    name: '王二',
-                    description: '描述',
-                    date: '2019-07-09 00:51:55'
-                }, {
-                    id:'2',
-                    name: '王二',
-                    description: '描述',
-                    date: '2019-07-09 00:51:55'
-                }, {
-                    id:'3',
-                    name: '王二',
-                    description: '描述',
-                    date: '2019-07-09 00:51:55'
-                }, {
-                    id:'4',
-                    name: '王二',
-                    description: '描述',
-                    date: '2019-07-09 00:51:55'
-                }]
+                tableData: [],
+                currentPage:1,
             }
         },
         methods:{
+            async getRoleList(){
+                let {data: {data}} = await this.api.getRoleList({
+                    currentPage: this.currentPage,
+                    pageSize: 10,
+                });
+                this.tableData = data.records;
+            },
             async deleteRow({id}) {
                 try{
                     await this.$confirm('确定删除该角色？', '提示', {
@@ -81,7 +75,16 @@
                 } catch {
                     //
                 }
+            },
+            handleSizeChange(val) {
+                console.log(`每页 ${val} 条`);
+            },
+            handleCurrentChange(val) {
+                console.log(`当前页: ${val}`);
             }
+        },
+        created(){
+            this.getRoleList()
         }
     }
 </script>

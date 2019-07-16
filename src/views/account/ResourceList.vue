@@ -1,22 +1,16 @@
 <template>
     <div>
-        <el-row type="flex" justify="space-between">
-            <el-col :span="20">
-                <el-form :inline="true" :label-position="'right'" ref="form" :model="form" class="demo-form-inline">
-                    <el-form-item label="资源类型:">
-                        <el-input v-model="form.resourceType" clearable></el-input>
-                    </el-form-item>
-                    <el-form-item>
-                        <el-button type="primary">查询</el-button>
-                    </el-form-item>
-                </el-form>
-            </el-col>
-            <el-col :span="4" align="right">
-                <div class="tool-buttons">
-                    <el-button plain type="primary" icon="el-icon-plus" @click="$refs['add-resource'].open()">添加资源</el-button>
-                </div>
-            </el-col>
-        </el-row>
+        <el-form :inline="true" :label-position="'right'" size="small" ref="form" :model="form" class="demo-form-inline">
+            <el-form-item label="资源类型:">
+                <el-input v-model="form.resourceType" clearable></el-input>
+            </el-form-item>
+            <el-form-item>
+                <el-button type="primary">查询</el-button>
+            </el-form-item>
+            <el-form-item>
+                <el-button plain type="primary" icon="el-icon-plus" @click="$refs['add-resource'].open()">添加资源</el-button>
+            </el-form-item>
+        </el-form>
         <el-table :data="tableData" class="ui-table">
             <el-table-column
                     type="index"
@@ -54,31 +48,18 @@
                 form:{
                     resourceType:'',
                 },
-                tableData: [{
-                    resourceName: '用户管理',
-                    description: '账户管理-用户管理',
-                    resourceCode: 'userList',
-                    isCascade: '否',
-                    resourceType: '菜单',
-                    id:'8e2b67e6ebc0429ba15e170826043996'
-                }, {
-                    resourceName: '用户管理',
-                    description: '账户管理-用户管理',
-                    resourceCode: 'userList',
-                    isCascade: '否',
-                    resourceType: '菜单',
-                    id:'8e2b67e6ebc0429ba15e170826043996'
-                },{
-                    resourceName: '用户管理',
-                    description: '账户管理-用户管理',
-                    resourceCode: 'userList',
-                    isCascade: '否',
-                    resourceType: '菜单',
-                    id:'8e2b67e6ebc0429ba15e170826043996'
-                }]
+                tableData: [],
+                currentPage:1
             }
         },
         methods:{
+            async getResourceList(){
+                let {data: {data}} = await this.api.getResourceList({
+                    currentPage: this.currentPage,
+                    pageSize: 10
+                });
+                this.tableData = data.records;
+            },
             async deleteResource(){
                 try{
                     await this.$confirm('确定删除该资源？','提示',{
@@ -90,6 +71,9 @@
                     //
                 }
             }
+        },
+        created(){
+            this.getResourceList()
         }
     }
 </script>

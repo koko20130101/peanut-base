@@ -9,7 +9,8 @@ import ElementUI from 'element-ui';
 
 Vue.config.productionTip = false
 Vue.prototype.api = api
-Vue.use(ElementUI, {size: 'small', zIndex: 3000});
+Vue.use(ElementUI);
+store.dispatch('app/restoreData')
 
 new Vue({
   router,

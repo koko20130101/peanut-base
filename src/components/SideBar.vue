@@ -47,7 +47,6 @@ export default {
   data () {
     return {
       isCollapse: false,
-      onRoute: 'UserList',
       menuList: [
         {
           'id': 53,
@@ -81,14 +80,14 @@ export default {
       ]
     }
   },
-  /*computed: {
+  computed: {
     ...mapState({
-      menuList: state => state.app.menuList
+      //menuList: state => state.app.menuList
     }),
     onRoute () {
       return this.$route.name
     }
-  },*/
+  },
   methods: {
     selectMenu (routerName, indexPath) {
       // this.$emit('change-router')

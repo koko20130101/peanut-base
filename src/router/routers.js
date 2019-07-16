@@ -8,10 +8,15 @@ export default [
         meta:{
             title:'首页',
             isAuth:true
+        },
+        redirect: (to) =>{
+            return{
+                name:'UserList'
+            }
         }
     },
     {
-        path: '',
+        path: '/',
         name: 'account',
         meta:{
             title:'系统管理',

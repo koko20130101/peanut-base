@@ -8,7 +8,7 @@
                 <Header @change-collapse="changeCollapse"></Header>
             </el-header>
             <el-main class="main-content">
-                <Breadcrumb></Breadcrumb>
+                <!--<Breadcrumb></Breadcrumb>-->
                 <div class="content">
                     <router-view/>
                 </div>

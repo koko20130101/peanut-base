@@ -10,10 +10,10 @@
                         <el-input placeholder="请输入用户名" v-model="loginInfo.username" clearable></el-input>
                     </el-form-item>
                     <el-form-item label="密码：" prop="pwd">
-                        <el-input placeholder="请输入密码" v-model="loginInfo.pwd" show-password clearable></el-input>
+                        <el-input placeholder="请输入密码" v-model="loginInfo.pwd" @keyup.enter="submitForm('form')" show-password clearable ></el-input>
                     </el-form-item>
                     <el-form-item>
-                        <el-button type="primary" @click="submitForm('form')">登 录</el-button>
+                        <el-button type="primary" @click="submitForm('form')" >登 录</el-button>
                         <el-button @click="resetForm('form')">重 置</el-button>
                     </el-form-item>
                 </el-form>
@@ -24,7 +24,7 @@
 
 <script>
     import MD5 from 'crypto-js/md5'
-    import {mapState, mapGetters, mapActions} from 'vuex'
+    import {mapState, mapGetters, mapActions,mapMutations} from 'vuex'
 
     export default {
         name: 'Login',
@@ -50,8 +50,10 @@
         },
         methods: {
             ...mapActions({
-                doLogin: 'app/login',
-                getMenu: 'permission/getMenu',
+                doLogin: 'app/login'
+            }),
+            ...mapMutations({
+                updateUserInfo: 'user/updateUserInfo',
             }),
             submitForm(formName) {
                 // 表单验证
@@ -61,21 +63,16 @@
                             await this.doLogin({
                                 username: this.loginInfo.username,
                                 password: MD5(this.loginInfo.pwd).toString()
-                            }).then(res =>{
-                                alert(9)
-                                console.log(res)
+                            }).then(()=>{
+                                //登录成功后的跳转
+                                this.$router.push({
+                                    path: '/user/list'
+                                })
                             })
+
                         } catch (e){
                             //
                         }
-                        // 等待登录成功
-                        /*await this.login({
-                            username: this.loginInfo.username,
-                            password: MD5(this.loginInfo.pwd).toString()
-                        })
-                        this.$router.push({
-                            name: 'userList'
-                        })*/
                     }
                 })
             },
