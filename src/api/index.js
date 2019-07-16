@@ -47,6 +47,12 @@ const api = {
     // getSelectResourceById: params => request.post('/resource/selectById', params),
     // 资源更新
     updateResource: params => axios.post('/resource/update', params),
+
+    /* role-resource-controller : 资源角色相关 */
+    // 获取角色所有资源
+    // getRoleResourceList: params => request.post('/roleResource/getRoleResourceList', params),
+    // 保存角色资源关系
+    saveRoleResourceList: params => axios.post('/roleResource/saveRoleResourceList', params),
 }
 
 export {api}

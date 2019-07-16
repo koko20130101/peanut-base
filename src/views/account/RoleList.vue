@@ -11,14 +11,14 @@
             <el-table-column prop="description" label="描述"></el-table-column>
             <el-table-column prop="date" label="添加时间"></el-table-column>
             <el-table-column width="220" label="操作">
-                <template  #default="{ row }">
-                    <el-button size="mini" @click="$refs['resource'].open(row)">权限</el-button>
+                <template  slot-scope="scope">
+                    <el-button size="mini" @click="$refs['resource'].open(scope.row)">权限</el-button>
                     <el-button
                             size="mini"
-                            @click="$refs['add-role'].edit(row)"
+                            @click="$refs['add-role'].edit(scope.row)"
                     >编辑</el-button>
                     <el-button
-                            @click.native.prevent="deleteRow(row)"
+                            @click.native.prevent="deleteRole(scope.row)"
                             size="mini"
                             type="danger"
                     >删除</el-button>
@@ -33,7 +33,7 @@
                 layout="total, prev, pager, next"
                 :total="1">
         </el-pagination>
-        <add-role ref="add-role"></add-role>
+        <add-role ref="add-role" @on-success="getRoleList()"></add-role>
         <distribute-resource ref="resource"></distribute-resource>
     </div>
 </template>
@@ -61,18 +61,24 @@
                 });
                 this.tableData = data.records;
             },
-            async deleteRow({id}) {
+            async deleteRole({id}) {
                 try{
                     await this.$confirm('确定删除该角色？', '提示', {
                         confirmButtonText: '确定',
                         cancelButtonText: '取消',
                         type: 'warning',
                     });
+                    await this.api.deleteRole({
+                        roleId: id
+                    });
                     this.$message({
                         message: '删除成功',
                         type: 'success',
-                    })
-                } catch {
+                    });
+                    this.getRoleList();
+                } catch (e) {
+                    if (e !== 'cancel') throw e
+                } finally {
                     //
                 }
             },

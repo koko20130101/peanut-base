@@ -46,9 +46,26 @@
         methods: {
             async doSubmit(formName) {
                 this.$refs[formName].validate(async valid => {
-                    if (valid){
-                        //表单验证成功后提交操作
+                    if(!valid) return;
+                    let params = {...this.form};
+
+                    if (this.isEdit) {
+                        await this.api.updateRole(params);
+                        this.$message({
+                            message: '保存成功',
+                            type: 'success',
+                        });
+                        this.$emit('on-success')
+                    } else {
+                        delete params.roleId;
+                        await this.api.saveRole(params);
+                        this.$message({
+                            message: '添加成功',
+                            type: 'success',
+                        });
+                        this.$emit('on-success')
                     }
+                    this.showDialog = false;
                 })
             },
             open() {
