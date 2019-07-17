@@ -1,5 +1,5 @@
 # peanut-base
-===
+
 ## Project setup
 ```
 npm install
